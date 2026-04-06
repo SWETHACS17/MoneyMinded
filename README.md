@@ -2,17 +2,13 @@
 
 A modern, animated personal finance dashboard built with **React**, **TypeScript**, and **Tailwind CSS**. Designed to help users track income, expenses, and gain financial insights through a visually rich, responsive interface.
 
-![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind](https://img.shields.io/badge/TailwindCSS-3-blue) ![Vite](https://img.shields.io/badge/Vite-5-purple)
 
----
 
 ## Overview
 
 MoneyMind is a frontend-only finance tracking dashboard that fulfils the requirements of the Finance Dashboard UI assignment. It features a dashboard overview with animated summary cards and charts, a filterable/searchable transactions section, a simulated role-based access system (Admin / Viewer), and an insights panel with spending analysis and monthly comparisons. All data is mock/static — no backend is required.
 
 The project is structured using component-level separation of concerns with a single React Context (`DashboardContext`) managing all application state.
-
----
 
 ## Features
 
@@ -58,7 +54,7 @@ The project is structured using component-level separation of concerns with a si
 - Skeleton loader shown for ~1.2 s on first mount to simulate data fetching
 - All interactive elements have graceful hover/tap micro-animations (Framer Motion / `motion`)
 
----
+
 
 ## Tech Stack
 
@@ -75,7 +71,6 @@ The project is structured using component-level separation of concerns with a si
 | State | React Context API |
 | Icons | Lucide React |
 
----
 
 ## Project Structure
 
@@ -111,7 +106,6 @@ src/
 └── main.tsx                      # Application entry point
 ```
 
----
 
 ## Getting Started
 
@@ -143,7 +137,6 @@ npm run build
 npm run preview
 ```
 
----
 
 ## Testing
 
@@ -155,7 +148,6 @@ npm run test
 npm run test:watch
 ```
 
----
 
 ## Responsive Breakpoints
 
@@ -164,8 +156,6 @@ npm run test:watch
 | < 640px (mobile) | Single-column layouts, compact dock, square insight cards |
 | 640–1024px (tablet) | Two-column grids, condensed charts |
 | > 1024px (desktop) | Full multi-column layouts, expanded visualisations |
-
----
 
 ## Dark Mode
 
@@ -186,7 +176,6 @@ Dark mode uses Tailwind's `class` strategy. The toggle in the header adds/remove
 
 Roles are switched via the segmented toggle in the header. No authentication or backend is involved — the role is stored in React state and drives conditional rendering.
 
----
 
 ## Design Decisions & Assumptions
 
@@ -197,8 +186,6 @@ Roles are switched via the segmented toggle in the header. No authentication or 
 5. **Edit Flow** — The edit (pencil) button is present in Admin mode but wires to a stub; a full in-place edit modal would be straightforward to add by reusing `AddTransactionModal` pre-populated with the selected transaction.
 6. **Custom SVG Chart** — The spending donut ring is implemented as a hand-rolled animated SVG rather than a Recharts `PieChart`, demonstrating direct SVG manipulation and Framer Motion integration.
 
----
 
-## License
 
 This project is submitted for evaluation purposes only.
