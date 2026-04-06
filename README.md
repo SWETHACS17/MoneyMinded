@@ -1,41 +1,40 @@
-# MoneyMind — Personal Finance Dashboard
-
+# MoneyMind
 A modern, animated personal finance dashboard built with **React**, **TypeScript**, and **Tailwind CSS**. Designed to help users track income, expenses, and gain financial insights through a visually rich, responsive interface.
 
 
 
 ## Overview
 
-MoneyMind is a frontend-only finance tracking dashboard that fulfils the requirements of the Finance Dashboard UI assignment. It features a dashboard overview with animated summary cards and charts, a filterable/searchable transactions section, a simulated role-based access system (Admin / Viewer), and an insights panel with spending analysis and monthly comparisons. All data is mock/static — no backend is required.
+MoneyMind is a frontend-only finance tracking dashboard that fulfils the requirements of the Finance Dashboard UI assignment. It features a dashboard overview with animated summary cards and charts, a filterable/searchable transactions section, a simulated role-based access system (Admin / Viewer), and an insights panel with spending analysis and monthly comparisons. All data is mock/static.
 
 The project is structured using component-level separation of concerns with a single React Context (`DashboardContext`) managing all application state.
 
 ## Features
 
 ### 1. Dashboard Overview
-- **Summary Cards** — Total Balance, Income, and Expenses with animated entry transitions
-- **Balance Trend Chart** — Time-based area chart showing a 6-month balance trend (powered by Recharts)
-- **Spending Breakdown** — Animated SVG donut chart with per-category spending visualization and a pulsing centre glow
-- **Hero Section** — Gradient banner with floating animated orbs and quick-view stats (Balance, Income, Savings Rate)
+- **Summary Cards** - Total Balance, Income, and Expenses with animated entry transitions
+- **Balance Trend Chart** - Time-based area chart showing a 6-month balance trend (powered by Recharts)
+- **Spending Breakdown** - Animated SVG donut chart with per-category spending visualization and a pulsing centre glow
+- **Hero Section** - Gradient banner with floating animated orbs and quick-view stats (Balance, Income, Savings Rate)
 
 ### 2. Transactions Section
-- Scrollable table with Date, Description, Category, and Amount (colour-coded income/expense)
-- **Search** — Real-time text search across description and category fields
-- **Filter by Type** — All / Income / Expense dropdown
-- **Filter by Category** — All categories or a specific one (Food, Bills, Transport, etc.)
-- **Sort** — Toggle between sort-by-date and sort-by-amount
-- **Admin actions** — Delete transaction (trash icon). Edit stub is present (pencil icon — wires up to full edit modal in a future iteration)
-- **Empty state** — Friendly message shown when no transactions match filters
+- Scrollable table with Date, Description, Category, and Amount
+- **Search** - Real-time text search across description and category fields
+- **Filter by Type** - All / Income / Expense dropdown
+- **Filter by Category** - All categories or a specific one (Food, Bills, Transport, etc.)
+- **Sort** - Toggle between sort-by-date and sort-by-amount
+- **Admin actions** - Delete transaction. Edit stub is also present
+- **Empty state** - Friendly message shown when no transactions match filters
 
 ### 3. Role-Based UI (Simulated Frontend RBAC)
-- **Viewer** — Can browse the full dashboard, transactions, and insights; add/delete controls are hidden
-- **Admin** — Full access including an "Add Transaction" button and per-row delete action
-- Role is toggled via a segmented control in the header (no login required — purely UI-level simulation)
+- **Viewer** - Can browse the full dashboard, transactions, and insights; add/delete controls are hidden
+- **Admin** - Full access including an "Add Transaction" button and per-row delete action
+- Role is toggled via a segmented control in the header (no login UI-level simulation)
 
 ### 4. Insights Section
-- **Highest Spending Category** — Computed from live transaction data
-- **Savings Rate** — Percentage of income retained after expenses
-- **Monthly Comparison** — Animated bar chart across a 6-month window (Jan–Jun) with per-month income, expense, and savings breakdown and a trend badge showing month-over-month expense change
+- **Highest Spending Category** - Computed from live transaction data
+- **Savings Rate** - Percentage of income retained after expenses
+- **Monthly Comparison** - Animated bar chart across a 6-month window (Jan–Jun) with per-month income, expense, and savings breakdown and a trend badge showing month-over-month expense change
 
 ### 5. State Management
 - **React Context API** (`DashboardContext`) manages:
@@ -161,7 +160,6 @@ npm run test:watch
 
 Dark mode uses Tailwind's `class` strategy. The toggle in the header adds/removes the `dark` class on `<html>`, which flips all semantic HSL colour tokens defined in `index.css`.
 
----
 
 ## Role-Based Access (Simulated)
 
@@ -179,13 +177,24 @@ Roles are switched via the segmented toggle in the header. No authentication or 
 
 ## Design Decisions & Assumptions
 
-1. **Mock Data** — All transactions are seeded in `DashboardContext.tsx`. Data spans March–April 2026 to allow a meaningful month-over-month comparison.
-2. **No Backend** — The app is entirely client-side. No API calls, databases, or server-side logic.
-3. **Role Simulation** — RBAC is implemented by toggling a state variable that conditionally renders admin-only UI elements. This satisfies the assignment's requirement for a demonstrable role switch.
-4. **Monthly Comparison Data** — The Insights panel uses a separate 6-month dummy dataset (Jan–Jun) for a richer visualisation than the transaction seed data alone would produce.
-5. **Edit Flow** — The edit (pencil) button is present in Admin mode but wires to a stub; a full in-place edit modal would be straightforward to add by reusing `AddTransactionModal` pre-populated with the selected transaction.
-6. **Custom SVG Chart** — The spending donut ring is implemented as a hand-rolled animated SVG rather than a Recharts `PieChart`, demonstrating direct SVG manipulation and Framer Motion integration.
+1. **Mock Data** - All transactions are seeded in `DashboardContext.tsx`. Data spans March–April 2026 to allow a meaningful month-over-month comparison.
+2. **No Backend** - The app is entirely client-side. No API calls, databases, or server-side logic.
+3. **Role Simulation** - RBAC is implemented by toggling a state variable that conditionally renders admin-only UI elements. This satisfies the assignment's requirement for a demonstrable role switch.
+4. **Monthly Comparison Data** - The Insights panel uses a separate 6-month dummy dataset (Jan–Jun) for a richer visualisation than the transaction seed data alone would produce.
+5. **Edit Flow** - The edit (pencil) button is present in Admin mode but wires to a stub; a full in-place edit modal would be straightforward to add by reusing `AddTransactionModal` pre-populated with the selected transaction.
+6. **Custom SVG Chart** - The spending donut ring is implemented as a hand-rolled animated SVG rather than a Recharts `PieChart`, demonstrating direct SVG manipulation and Framer Motion integration.
 
+
+## ScreenShots
+
+### Dark Mode:
+<br>
+<img width="707" height="525" alt="Screenshot 2026-04-06 095905" src="https://github.com/user-attachments/assets/5cabf218-2830-448d-a015-043ab629c9da" />
+<br><br>
+
+### Light Mode:
+<br>
+<img width="707" height="525" alt="image" src="https://github.com/user-attachments/assets/950fd518-c595-4da6-b31c-e311f2ebcd7d" />
 
 
 This project is submitted for evaluation purposes only.
