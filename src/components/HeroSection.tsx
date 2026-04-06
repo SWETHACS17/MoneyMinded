@@ -39,20 +39,15 @@ export default function HeroSection() {
               transition={{ delay: 0.2 }}
               className="flex items-center gap-2 mb-4"
             >
-              <motion.div
-                animate={{ rotate: [0, 15, -15, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Sparkles className="w-5 h-5 text-[hsl(25_95%_58%)]" />
-              </motion.div>
-              <span className="text-sm font-medium text-foreground/70">Your Financial Overview</span>
+
+
             </motion.div>
 
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold leading-tight mb-3"
+              className="text-3xl sm:text-4xl lg:text-6xl font-heading font-bold leading-tight mb-3"
             >
               <span className="gradient-text">Take Control</span>
               <br />
@@ -65,7 +60,7 @@ export default function HeroSection() {
               transition={{ delay: 0.4 }}
               className="text-muted-foreground text-sm sm:text-base max-w-md"
             >
-              Track spending, monitor income, and build smarter financial habits — all in one beautiful dashboard.
+              Track spending, monitor income, and build smarter financial habits.
             </motion.p>
 
             <motion.div

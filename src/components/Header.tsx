@@ -13,7 +13,7 @@ export default function Header() {
     >
       <div>
         <h1 className="text-xl sm:text-2xl font-heading font-bold gradient-text">MoneyMind</h1>
-        <p className="text-xs text-muted-foreground mt-0.5">Your financial overview</p>
+        <p className="text-xs text-muted-foreground mt-0.5">Control Your Finances</p>
       </div>
       <div className="flex items-center gap-2">
         <div className="flex items-center bg-secondary rounded-lg p-0.5 text-xs">

@@ -30,7 +30,7 @@ function DashboardContent() {
     <div className="min-h-screen gradient-bg-subtle">
       <Header />
       {activeView === 'dashboard' && <HeroSection />}
-      <main className="px-4 sm:px-6 lg:px-8 pb-24 max-w-7xl mx-auto">
+      <main className="px-4 sm:px-6 lg:px-8 pb-24 max-w-[1700px] mx-auto">
         {activeView === 'dashboard' && <DashboardView />}
         {activeView === 'transactions' && <TransactionList />}
         {activeView === 'insights' && <InsightsPanel />}
