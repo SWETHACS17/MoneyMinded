@@ -6,7 +6,6 @@ import BorderGlowCard from './BorderGlowCard';
 function formatCurrency(n: number) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(n);
 }
-
 const cards = [
   { key: 'balance', label: 'Monthly Balance', icon: Wallet, color: 'text-primary' },
   { key: 'income', label: 'Total Income', icon: TrendingUp, color: 'text-success' },

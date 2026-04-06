@@ -81,7 +81,6 @@ export default function InsightsPanel() {
       className="space-y-6"
     >
       <h3 className="text-lg font-heading font-semibold">Insights</h3>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {primaryInsights.map((insight, i) => (
           <motion.div

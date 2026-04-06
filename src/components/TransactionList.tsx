@@ -178,7 +178,6 @@ export default function TransactionList() {
           </table>
         )}
       </div>
-
       <AddTransactionModal open={showAdd} onClose={closeModal} editingTransaction={editingTransaction} />
     </motion.div>
   );

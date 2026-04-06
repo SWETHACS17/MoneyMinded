@@ -27,7 +27,6 @@ export default function Header() {
           <p className="text-xs text-muted-foreground mt-0.5 hidden xs:block">Control Your Finances</p>
         </div>
       </div>
-
       {/* Controls */}
       <div className="flex items-center gap-2">
         <div className="flex items-center bg-secondary rounded-lg p-0.5 text-xs">
