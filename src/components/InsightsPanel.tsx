@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { TrendingUp, TrendingDown, AlertTriangle, Star, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { TrendingUp, AlertTriangle, Star, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { useDashboard } from '@/context/DashboardContext';
 import { useMemo } from 'react';
 import BorderGlowCard from './BorderGlowCard';
@@ -33,6 +33,7 @@ const MONTHLY_DUMMY = [
   { month: 'May', income: 5100, expense: 3600 },
   { month: 'Jun', income: 4900, expense: 3200 },
 ];
+
 
 export default function InsightsPanel() {
   const { transactions, totalIncome, totalExpenses } = useDashboard();
@@ -81,7 +82,7 @@ export default function InsightsPanel() {
     >
       <h3 className="text-lg font-heading font-semibold">Insights</h3>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {primaryInsights.map((insight, i) => (
           <motion.div
             key={insight.title}
@@ -90,17 +91,17 @@ export default function InsightsPanel() {
             transition={{ delay: 0.3 + i * 0.1, type: 'spring', stiffness: 100 }}
           >
             <BorderGlowCard>
-              <div className="p-4 sm:p-5 flex flex-col items-center justify-center text-center aspect-square sm:aspect-auto sm:flex-row sm:items-start sm:text-left gap-3">
+              <div className="p-3 sm:p-4 flex flex-row items-center gap-3">
                 <motion.div
-                  className="p-2 rounded-lg bg-secondary"
+                  className="p-2 rounded-lg bg-secondary flex-shrink-0 self-center"
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <insight.icon className={`w-5 h-5 ${insight.iconColor}`} />
+                  <insight.icon className={`w-4 h-4 ${insight.iconColor}`} />
                 </motion.div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-sm">{insight.title}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{insight.description}</p>
+                  <p className="font-medium text-sm leading-tight">{insight.title}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5 leading-snug">{insight.description}</p>
                 </div>
               </div>
             </BorderGlowCard>

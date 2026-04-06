@@ -8,7 +8,7 @@ function formatCurrency(n: number) {
 }
 
 const cards = [
-  { key: 'balance', label: 'Total Balance', icon: Wallet, color: 'text-primary' },
+  { key: 'balance', label: 'Monthly Balance', icon: Wallet, color: 'text-primary' },
   { key: 'income', label: 'Total Income', icon: TrendingUp, color: 'text-success' },
   { key: 'expenses', label: 'Total Expenses', icon: TrendingDown, color: 'text-destructive' },
 ] as const;

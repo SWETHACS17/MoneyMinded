@@ -1,19 +1,45 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, ArrowUpDown, Plus, Pencil, Trash2 } from 'lucide-react';
+import { Search, ArrowUpDown, Plus, Pencil, Trash2, Download } from 'lucide-react';
 import { useDashboard, type Category, type TransactionType, type Transaction } from '@/context/DashboardContext';
 import { useState } from 'react';
 import AddTransactionModal from './AddTransactionModal';
 
 const CATEGORIES: Category[] = ['Food', 'Transport', 'Shopping', 'Entertainment', 'Health', 'Bills', 'Salary', 'Freelance', 'Investment', 'Other'];
 
+function exportToCSV(transactions: Transaction[]) {
+  const headers = ['Date', 'Description', 'Category', 'Type', 'Amount'];
+  const rows = transactions.map(t => [
+    t.date,
+    `"${t.description.replace(/"/g, '""')}"`,
+    t.category,
+    t.type,
+    t.type === 'income' ? t.amount : -t.amount,
+  ]);
+  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `moneymind-transactions-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export default function TransactionList() {
   const { filteredTransactions, filters, setFilters, role, deleteTransaction } = useDashboard();
   const [showAdd, setShowAdd] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   const openAdd = () => { setEditingTransaction(null); setShowAdd(true); };
   const openEdit = (t: Transaction) => { setEditingTransaction(t); setShowAdd(true); };
   const closeModal = () => { setShowAdd(false); setEditingTransaction(null); };
+
+  const handleExport = () => {
+    setExporting(true);
+    exportToCSV(filteredTransactions);
+    setTimeout(() => setExporting(false), 1000);
+  };
 
   const toggleSort = () => {
     if (filters.sortBy === 'date') {
@@ -30,18 +56,39 @@ export default function TransactionList() {
       transition={{ delay: 0.3 }}
       className="glass-card rounded-xl p-5 lg:p-6"
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <h3 className="text-lg font-heading font-semibold">Transactions</h3>
-        {role === 'admin' && (
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* Export button — always visible */}
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => openAdd()}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
+            onClick={handleExport}
+            className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg border border-border bg-background hover:bg-secondary text-sm font-medium transition-colors"
           >
-            <Plus className="w-4 h-4" /> Add
+            <motion.span
+              animate={exporting ? { y: [0, 3, 0] } : {}}
+              transition={{ duration: 0.4, repeat: exporting ? 2 : 0 }}
+              className="flex items-center"
+            >
+              <Download className="w-4 h-4 text-primary" />
+            </motion.span>
+            <span>Export</span>
           </motion.button>
-        )}
+
+          {/* Add button — admin only */}
+          {role === 'admin' && (
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => openAdd()}
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Add</span>
+            </motion.button>
+          )}
+        </div>
       </div>
 
       {/* Filters */}
