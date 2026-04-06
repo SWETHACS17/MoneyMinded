@@ -48,10 +48,18 @@ export function PageLoader() {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center gap-4"
+        className="flex flex-col items-center gap-2"
       >
-        <div className="w-12 h-12 rounded-full border-2 border-primary border-t-transparent animate-spin-slow" />
-        <p className="text-sm text-muted-foreground font-medium">Loading your finances...</p>
+        {/* @ts-expect-error dotlottie-player is a web component */}
+        <dotlottie-player
+          src="https://lottie.host/351c1f22-d755-4fed-b504-c891e0d22b76/B0vV62RAbe.lottie"
+          background="transparent"
+          speed="1"
+          style={{ width: '160px', height: '160px' }}
+          loop
+          autoplay
+        />
+        <p className="text-sm text-muted-foreground font-medium mt-1">Loading your finances...</p>
       </motion.div>
     </div>
   );

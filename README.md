@@ -38,11 +38,11 @@ The project is structured using component-level separation of concerns with a si
 
 ### 5. State Management
 - **React Context API** (`DashboardContext`) manages:
-  - Transaction list (mock seed data + runtime mutations)
+  - Transaction list (mock seed data + runtime mutations + LocalStorage persistence)
   - Active navigation view
   - Filter, search, and sort state
-  - Selected role (admin / viewer)
-  - Dark mode preference
+  - Selected role (admin / viewer) (persist via LocalStorage)
+  - Dark mode preference (persist via LocalStorage)
 - Derived values (`filteredTransactions`, `totalBalance`, `totalIncome`, `totalExpenses`) are memoised with `useMemo`
 
 ### 6. UI / UX
@@ -181,7 +181,7 @@ Roles are switched via the segmented toggle in the header. No authentication or 
 2. **No Backend** - The app is entirely client-side. No API calls, databases, or server-side logic.
 3. **Role Simulation** - RBAC is implemented by toggling a state variable that conditionally renders admin-only UI elements. This satisfies the assignment's requirement for a demonstrable role switch.
 4. **Monthly Comparison Data** - The Insights panel uses a separate 6-month dummy dataset (Jan–Jun) for a richer visualisation than the transaction seed data alone would produce.
-5. **Edit Flow** - The edit (pencil) button is present in Admin mode but wires to a stub; a full in-place edit modal would be straightforward to add by reusing `AddTransactionModal` pre-populated with the selected transaction.
+5. **Data Persistence & Edit Flow** - Transaction state, dark mode, and role selections are persisted natively in `localStorage`. In-place edits are fully supported using the pre-populated transaction modal.
 6. **Custom SVG Chart** - The spending donut ring is implemented as a hand-rolled animated SVG rather than a Recharts `PieChart`, demonstrating direct SVG manipulation and Framer Motion integration.
 
 

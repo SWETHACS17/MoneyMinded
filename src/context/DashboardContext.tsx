@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo, useEffect } from 'react';
 
 export type Role = 'admin' | 'viewer';
 export type TransactionType = 'income' | 'expense';
@@ -76,8 +76,19 @@ export function useDashboard() {
 }
 
 export function DashboardProvider({ children }: { children: React.ReactNode }) {
-  const [role, setRole] = useState<Role>('admin');
-  const [transactions, setTransactions] = useState<Transaction[]>(MOCK_TRANSACTIONS);
+  const [role, setRole] = useState<Role>(() => {
+    const saved = localStorage.getItem('role');
+    return (saved as Role) || 'admin';
+  });
+  
+  const [transactions, setTransactions] = useState<Transaction[]>(() => {
+    const saved = localStorage.getItem('transactions');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) {}
+    }
+    return MOCK_TRANSACTIONS;
+  });
+  
   const [filters, setFiltersState] = useState<Filters>({
     search: '',
     type: 'all',
@@ -86,16 +97,29 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     sortOrder: 'desc',
   });
   const [activeView, setActiveView] = useState('dashboard');
-  const [isDark, setIsDark] = useState(false);
+  
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem('isDark');
+    if (saved) return JSON.parse(saved);
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+  
   const [isLoading] = useState(false);
 
-  const toggleDark = useCallback(() => {
-    setIsDark(prev => {
-      const next = !prev;
-      document.documentElement.classList.toggle('dark', next);
-      return next;
-    });
-  }, []);
+  useEffect(() => {
+    localStorage.setItem('role', role);
+  }, [role]);
+
+  useEffect(() => {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }, [transactions]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('isDark', JSON.stringify(isDark));
+  }, [isDark]);
+
+  const toggleDark = useCallback(() => setIsDark(p => !p), []);
 
   const setFilters = useCallback((partial: Partial<Filters>) => {
     setFiltersState(prev => ({ ...prev, ...partial }));

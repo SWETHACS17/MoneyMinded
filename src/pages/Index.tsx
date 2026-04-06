@@ -40,10 +40,4 @@ function DashboardContent() {
   );
 }
 
-export default function Index() {
-  return (
-    <DashboardProvider>
-      <DashboardContent />
-    </DashboardProvider>
-  );
-}
+export default DashboardContent;

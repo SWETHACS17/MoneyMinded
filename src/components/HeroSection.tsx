@@ -78,7 +78,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, type: 'spring', stiffness: 100 }}
-            className="flex flex-row lg:flex-col gap-3 sm:gap-4"
+            className="hidden sm:flex flex-row lg:flex-col gap-3 sm:gap-4"
           >
             {[
               { label: 'Balance', value: `$${totalBalance.toLocaleString()}`, gradient: 'from-[hsl(220_75%_55%)] to-[hsl(200_80%_72%)]' },
